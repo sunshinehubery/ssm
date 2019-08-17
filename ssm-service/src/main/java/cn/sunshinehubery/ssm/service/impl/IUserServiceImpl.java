@@ -60,4 +60,9 @@ public class IUserServiceImpl implements IUserService {
         userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
         userDao.save(userInfo);
     }
+
+    @Override
+    public UserInfo findById(String id) throws Exception {
+        return userDao.findById(id);
+    }
 }
