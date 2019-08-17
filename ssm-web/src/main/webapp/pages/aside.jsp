@@ -33,15 +33,15 @@
 				<ul class="treeview-menu">
 
 					<li id="system-setting"><a
-						href="${pageContext.request.contextPath}/user/findAll.do?page=1&pageSize=2"> <i
+						href="${pageContext.request.contextPath}/user/findAll.do?page=1&size=2"> <i
 							class="fa fa-circle-o"></i> 用户管理
 					</a></li>
 					<li id="system-setting"><a
-						href="${pageContext.request.contextPath}/role/findAll.do"> <i
+						href="${pageContext.request.contextPath}/role/findAll.do?page=1&size=2"> <i
 							class="fa fa-circle-o"></i> 角色管理
 					</a></li>
 					<li id="system-setting"><a
-						href="${pageContext.request.contextPath}/permission/findAll.do">
+						href="${pageContext.request.contextPath}/permission/findAll.do?page=1&size=2">
 							<i class="fa fa-circle-o"></i> 资源权限管理
 					</a></li>
 					<li id="system-setting"><a
@@ -57,11 +57,11 @@
 				<ul class="treeview-menu">
 
 					<li id="system-setting"><a
-						href="${pageContext.request.contextPath}/product/findAll.do?page=1&pageSize=4">
+						href="${pageContext.request.contextPath}/product/findAll.do?page=1&size=4">
 							<i class="fa fa-circle-o"></i> 产品管理
 					</a></li>
 					<li id="system-setting"><a
-						href="${pageContext.request.contextPath}/orders/findAll.do?page=1&pageSize=4"> <i
+						href="${pageContext.request.contextPath}/orders/findAll.do?page=1&size=4"> <i
 							class="fa fa-circle-o"></i> 订单管理
 					</a></li>
 
