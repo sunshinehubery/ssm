@@ -26,7 +26,7 @@ public class IPermissionController {
         mv.setViewName("permission-list");
         return mv;
     }
-    @RequestMapping("save.do")
+    @RequestMapping("/save.do")
     public String save(Permission permission) throws Exception {
         permissionService.save(permission);
         return "redirect:findAll.do";

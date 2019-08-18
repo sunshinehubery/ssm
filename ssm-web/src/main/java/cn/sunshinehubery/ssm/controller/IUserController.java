@@ -18,7 +18,7 @@ import java.util.List;
 public class IUserController {
     @Autowired
     private IUserService userService;
-    @RequestMapping("findAll.do")
+    @RequestMapping("/findAll.do")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ModelAndView findAll(@RequestParam(name = "page",required = true,defaultValue = "1")Integer page,
                                 @RequestParam(name = "size",required = true,defaultValue = "1")Integer pageSize) throws Exception {
@@ -30,14 +30,14 @@ public class IUserController {
         return mv;
     }
 
-    @RequestMapping("save.do")
+    @RequestMapping("/save.do")
     @PreAuthorize("authentication.principal.username == 'sunshine'")
     public String save(UserInfo userInfo) throws Exception {
         userService.save(userInfo);
         return "redirect:findAll.do";
     }
 
-    @RequestMapping("findById.do")
+    @RequestMapping("/findById.do")
     public ModelAndView findById(String id)throws Exception{
         ModelAndView mv = new ModelAndView();
         UserInfo userInfo = userService.findById(id);
@@ -46,7 +46,7 @@ public class IUserController {
         return mv;
     }
 
-    @RequestMapping("findUserByIdAndAllRole.do")
+    @RequestMapping("/findUserByIdAndAllRole.do")
     public ModelAndView findUserByIdAndAllRole(@RequestParam(name = "id",required = true)String userId) throws Exception {
         ModelAndView mv = new ModelAndView();
         UserInfo userInfo = userService.findById(userId);
@@ -57,7 +57,7 @@ public class IUserController {
         return mv;
     }
 
-    @RequestMapping("addRoleToUser.do")
+    @RequestMapping("/addRoleToUser.do")
     public String addRoleToUser(@RequestParam(name = "userId",required = true)String userId,
                                 @RequestParam(name = "ids",required = true)String[] ids) throws Exception {
         userService.addRoleToUser(userId,ids);

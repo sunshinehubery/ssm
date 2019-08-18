@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 
@@ -246,7 +247,7 @@
 
 										<tr>
 											<td><input name="ids" type="checkbox"></td>
-											<td>${orders.id }</td>
+											<td>${fn:substring(orders.id, 0, 10)}</td>
 											<td>${orders.orderNum }</td>
 											<td>${orders.product.productName }</td>
 											<td>${orders.product.productPrice }</td>

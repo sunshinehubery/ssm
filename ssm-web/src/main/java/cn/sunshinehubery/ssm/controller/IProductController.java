@@ -28,7 +28,7 @@ public class IProductController {
         mv.setViewName("product-list1");
         return mv;
     }
-    @RequestMapping("save.do")
+    @RequestMapping("/save.do")
     public String save(Product product)throws Exception{
         productService.save(product);
         return "redirect:findAll.do";

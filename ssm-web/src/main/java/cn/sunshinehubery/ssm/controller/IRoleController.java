@@ -35,7 +35,7 @@ public class IRoleController {
         return "redirect:findAll.do";
     }
 
-    @RequestMapping("findRoleByIdAndAllPermission.do")
+    @RequestMapping("/findRoleByIdAndAllPermission.do")
     public ModelAndView findRoleByIdAndAllPermission(@RequestParam(name = "roleId",required = true)String roleId) throws Exception {
         ModelAndView mv = new ModelAndView();
         Role role = roleService.findById(roleId);
@@ -46,7 +46,7 @@ public class IRoleController {
         return mv;
     }
 
-    @RequestMapping("addPermissionToRole.do")
+    @RequestMapping("/addPermissionToRole.do")
     public String addPermissionToRole(@RequestParam(name = "roleId",required = true)String roleId,
                                       @RequestParam(name = "ids",required = true)String[] ids) throws Exception {
         roleService.addPermissionToRole(roleId,ids);

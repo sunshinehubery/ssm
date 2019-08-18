@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 
 <head>
@@ -211,7 +212,7 @@
                             <c:forEach var="product" items="${productList.list}">
                             <tr>
                                 <td><input name="ids" type="checkbox"></td>
-                                <td>${product.id}</td>
+                                <td>${fn:substring(product.id, 0, 10)}</td>
                                 <td>${product.productNum}
                                 </td>
                                 <td>${product.productName}</td>
