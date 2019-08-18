@@ -1,5 +1,6 @@
 package cn.sunshinehubery.ssm.controller;
 
+import cn.sunshinehubery.ssm.pojo.Role;
 import cn.sunshinehubery.ssm.pojo.UserInfo;
 import cn.sunshinehubery.ssm.service.IUserService;
 import com.github.pagehelper.PageInfo;
@@ -40,5 +41,23 @@ public class IUserController {
         mv.addObject("user",userInfo);
         mv.setViewName("user-show");
         return mv;
+    }
+
+    @RequestMapping("findUserByIdAndAllRole.do")
+    public ModelAndView findUserByIdAndAllRole(@RequestParam(name = "id",required = true)String userId) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        UserInfo userInfo = userService.findById(userId);
+        List<Role> roleList = userService.findOthersRoles(userId);
+        mv.addObject("user",userInfo);
+        mv.addObject("roleList",roleList);
+        mv.setViewName("user-role-add");
+        return mv;
+    }
+
+    @RequestMapping("addRoleToUser.do")
+    public String addRoleToUser(@RequestParam(name = "userId",required = true)String userId,
+                                @RequestParam(name = "ids",required = true)String[] ids) throws Exception {
+        userService.addRoleToUser(userId,ids);
+        return "redirect:findAll.do";
     }
 }

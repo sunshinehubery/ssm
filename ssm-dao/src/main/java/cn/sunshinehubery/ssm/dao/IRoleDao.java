@@ -1,5 +1,6 @@
 package cn.sunshinehubery.ssm.dao;
 
+import cn.sunshinehubery.ssm.pojo.Permission;
 import cn.sunshinehubery.ssm.pojo.Role;
 import org.apache.ibatis.annotations.*;
 
@@ -21,4 +22,13 @@ public interface IRoleDao {
 
     @Insert("insert into role(roleName,roleDesc) values(#{roleName},#{roleDesc})")
     void save(Role role);
+
+    @Select("select * from role where id = #{roleId}")
+    Role findById(String roleId)throws Exception;
+
+    @Select("select * from permission where id not in(select permissionId from role_permission where roleId = #{roleId})")
+    List<Permission> findOthersPermission(String roleId)throws Exception;
+
+    @Insert("insert into role_permission(roleId,permissionId) values(#{roleId},#{permissionId})")
+    void addPermissionToRole(@Param("roleId") String roleId,@Param("permissionId") String permissionId)throws Exception;
 }

@@ -1,5 +1,6 @@
 package cn.sunshinehubery.ssm.controller;
 
+import cn.sunshinehubery.ssm.pojo.Permission;
 import cn.sunshinehubery.ssm.pojo.Role;
 import cn.sunshinehubery.ssm.service.IRoleService;
 import com.github.pagehelper.PageInfo;
@@ -31,6 +32,24 @@ public class IRoleController {
     @RequestMapping("/save.do")
     public String save(Role role) throws Exception {
         roleService.save(role);
+        return "redirect:findAll.do";
+    }
+
+    @RequestMapping("findRoleByIdAndAllPermission.do")
+    public ModelAndView findRoleByIdAndAllPermission(@RequestParam(name = "roleId",required = true)String roleId) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        Role role = roleService.findById(roleId);
+        List<Permission> permissionList = roleService.findOthersPermission(roleId);
+        mv.addObject("role",role);
+        mv.addObject("permissionList",permissionList);
+        mv.setViewName("role-permission-add");
+        return mv;
+    }
+
+    @RequestMapping("addPermissionToRole.do")
+    public String addPermissionToRole(@RequestParam(name = "roleId",required = true)String roleId,
+                                      @RequestParam(name = "ids",required = true)String[] ids) throws Exception {
+        roleService.addPermissionToRole(roleId,ids);
         return "redirect:findAll.do";
     }
 }
