@@ -5,6 +5,7 @@ import cn.sunshinehubery.ssm.pojo.UserInfo;
 import cn.sunshinehubery.ssm.service.IUserService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,7 @@ public class IUserController {
     @Autowired
     private IUserService userService;
     @RequestMapping("findAll.do")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ModelAndView findAll(@RequestParam(name = "page",required = true,defaultValue = "1")Integer page,
                                 @RequestParam(name = "size",required = true,defaultValue = "1")Integer pageSize) throws Exception {
         List<UserInfo> userInfoList  = userService.findAll(page,pageSize);
@@ -29,6 +31,7 @@ public class IUserController {
     }
 
     @RequestMapping("save.do")
+    @PreAuthorize("authentication.principal.username == 'sunshine'")
     public String save(UserInfo userInfo) throws Exception {
         userService.save(userInfo);
         return "redirect:findAll.do";

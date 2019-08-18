@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <aside class="main-sidebar">
 	<!-- sidebar: style can be found in sidebar.less -->
 	<section class="sidebar">
@@ -11,7 +11,7 @@
 					class="img-circle" alt="User Image">
 			</div>
 			<div class="pull-left info">
-				<p>xxx</p>
+				<p><security:authentication property="principal.username"/></p>
 				<a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
 			</div>
 		</div>
@@ -31,23 +31,32 @@
 
 			</a>
 				<ul class="treeview-menu">
-
-					<li id="system-setting"><a
-						href="${pageContext.request.contextPath}/user/findAll.do?page=1&size=2"> <i
-							class="fa fa-circle-o"></i> 用户管理
-					</a></li>
-					<li id="system-setting"><a
-						href="${pageContext.request.contextPath}/role/findAll.do?page=1&size=2"> <i
-							class="fa fa-circle-o"></i> 角色管理
-					</a></li>
-					<li id="system-setting"><a
-						href="${pageContext.request.contextPath}/permission/findAll.do?page=1&size=2">
-							<i class="fa fa-circle-o"></i> 资源权限管理
-					</a></li>
-					<li id="system-setting"><a
-						href="${pageContext.request.contextPath}/sysLog/findAll.do"> <i
-							class="fa fa-circle-o"></i> 访问日志
-					</a></li>
+					<security:authorize access="hasRole('ADMIN')">
+						<li id="system-setting">
+							<a
+							href="${pageContext.request.contextPath}/user/findAll.do?page=1&size=2"> <i
+								class="fa fa-circle-o"></i> 用户管理
+							</a>
+						</li>
+						<li id="system-setting">
+							<a
+							href="${pageContext.request.contextPath}/role/findAll.do?page=1&size=2"> <i
+								class="fa fa-circle-o"></i> 角色管理
+							</a>
+						</li>
+						<li id="system-setting">
+							<a
+							href="${pageContext.request.contextPath}/permission/findAll.do?page=1&size=2">
+								<i class="fa fa-circle-o"></i> 资源权限管理
+						</a>
+						</li>
+						<li id="system-setting">
+							<a
+							href="${pageContext.request.contextPath}/sysLog/findAll.do"> <i
+								class="fa fa-circle-o"></i> 访问日志
+							</a>
+						</li>
+					</security:authorize>
 				</ul></li>
 			<li class="treeview"><a href="#"> <i class="fa fa-cube"></i>
 					<span>基础数据</span> <span class="pull-right-container"> <i
